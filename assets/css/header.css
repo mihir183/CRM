@@ -1,0 +1,10 @@
+.CModal{
+    .modal-dialog{
+        .modal-content{
+            position: relative;
+            top: 70px;
+            left: 230px;
+            width: 130px!important;
+        }
+    }
+}
