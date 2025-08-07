@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include 'CSRF_Token.php' ?>
 <!doctype html>
 <html lang="en">
 
@@ -40,7 +40,6 @@
             </h3>
 
             <form action="connect.php" method="post" onsubmit="beforeSubmit(event)" id="regForm">
-
                 <!-- Username -->
                 <label for="user" class="form-label">Username</label>
                 <div class="input-group mb-3">
@@ -80,6 +79,9 @@
                     <input type="password" id="cpass" name="cpass" class="form-control" placeholder="Confirm Password"
                         aria-label="Confirm Password" required>
                 </div>
+
+                <!-- Hidden CSRF Token -->
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
 
                 <!-- Submit Button -->
                 <button class="btn btn-primary w-100 mb-3 text-capitalize" type="submit">Register</button>

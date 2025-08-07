@@ -53,9 +53,10 @@ if ($conn) {
                         <select name="client" id="client" class="form-control mb-5">
                             <!-- Fetch Client Name for select client Ticket registration -->
                             <?php if (count($clients) > 0): ?>
-                                <?php foreach ($clients as $index => $client): ?>
+                                <option value="" class="text-capitalize">Select Client</option>
+                                <?php foreach ($clients as $client): ?>
                                     <option value="<?= htmlspecialchars($client['key_person']) ?>" class="text-capitalize">
-                                        <?= htmlspecialchars($client['key_person']) ?>
+                                        <?= $client['key_person'] ?>
                                     </option>
 
                                 <?php endforeach; ?>
@@ -160,6 +161,55 @@ if ($conn) {
 
             </form>
         </div>
+
+        <!-- GET CLIENT DATA ONCHANGE OF SELECT INPUT -->
+        <script>
+            document.getElementById('client').addEventListener('change', function () {
+                const keyPerson = this.value;
+
+                // Elements to clear or fill
+                const fields = {
+                    name: '',
+                    mobile: '',
+                    address: '',
+                    city: '',
+                    email: ''
+                };
+
+                // If no value selected, just clear all fields
+                if (!keyPerson) {
+                    for (const id in fields) {
+                        document.getElementById(id).value = '';
+                    }
+                    return;
+                }
+
+                // Otherwise, fetch client data
+                fetch('get_client_data.php?key_person=' + encodeURIComponent(keyPerson))
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.getElementById('name').value = data.client.key_person || '';
+                            document.getElementById('mobile').value = data.client.mobile || '';
+                            document.getElementById('address').value = data.client.address || '';
+                            document.getElementById('city').value = data.client.city || '';
+                            document.getElementById('email').value = data.client.email || '';
+                        } else {
+                            alert('Client not found.');
+                            for (const id in fields) {
+                                document.getElementById(id).value = '';
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching client:', error);
+                        for (const id in fields) {
+                            document.getElementById(id).value = '';
+                        }
+                    });
+            });
+        </script>
+
 
         <?php include 'footer.php' ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
