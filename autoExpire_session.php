@@ -1,6 +1,6 @@
 <?php
 
-$timeout = 10; // 1 hour = 3600 seconds
+$timeout = 3600; // 1 hour = 3600 seconds
 
 // Check if user is logged in
 if (isset($_SESSION['user'])) {

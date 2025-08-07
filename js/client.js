@@ -4,7 +4,7 @@ function beforeSubmit(event) {
         const tel = /^[6789][0-9]{9}$/;
         var mobile = document.querySelector('#mobile').value
         var phone = document.querySelector('#phone').value
-
+        console.log(phone,mobile)
         document.querySelector('#err_mob').innerHTML = "";
         document.querySelector('#err_pho').innerHTML = "";
 
@@ -23,5 +23,7 @@ function beforeSubmit(event) {
         
         if(isValid){
           document.getElementById("myForm").submit();
+        }else{
+          document.getElementById("myForm").reset();
         }
       }

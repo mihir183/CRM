@@ -1,4 +1,19 @@
-<?php include 'check_session.php'?>
+<?php include 'check_session.php' ?>
+<?php
+include 'db.php';
+
+if ($conn) {
+    $stmt = $conn->prepare("SELECT * FROM client");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $clients = [];
+    while ($row = $result->fetch_assoc()) {
+        $clients[] = $row;
+    }
+    $stmt->close();
+}
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -23,9 +38,10 @@
         </div>
 
         <div class="container mt-3">
-            <p class="text-danger">* Denotes compulsory fields & special symbol like <> " ' \ etc is not alow due to security reason</p>
+            <p class="text-danger">* Denotes compulsory fields & special symbol like <> " ' \ etc is not alow due to
+                    security reason</p>
 
-            <form action="">
+            <form action="" method="post">
                 <div class="row row-cols-2">
                     <div class="col">
                         <label for="date" class="text-capitalize form-label">date<span
@@ -35,7 +51,18 @@
                         <label for="client" class="text-capitalize form-label">client<span
                                 class="text-danger">*</span></label>
                         <select name="client" id="client" class="form-control mb-5">
-                            <option value="" class="text-capitalize">Select Client</option>
+                            <!-- Fetch Client Name for select client Ticket registration -->
+                            <?php if (count($clients) > 0): ?>
+                                <?php foreach ($clients as $index => $client): ?>
+                                    <option value="<?= htmlspecialchars($client['key_person']) ?>" class="text-capitalize">
+                                        <?= htmlspecialchars($client['key_person']) ?>
+                                    </option>
+
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <option value="" class="text-capitalize">Select Client</option>
+                            <?php endif; ?>
+
                         </select>
 
                         <label for="product" class="text-capitalize form-label">product<span
@@ -46,7 +73,7 @@
 
                         <label for="complain" class="text-capitalize form-label">complain<span
                                 class="text-danger">*</span></label>
-                        <textarea name="complain" id="complain" name="complain" class="form-control">   
+                        <textarea name="complain" id="complain" name="complain" class="form-control">
                         </textarea>
                     </div>
                     <!-- Column 2 -->
@@ -64,7 +91,7 @@
 
                         <div class="address mb-1">
                             <label for="address" class="text-capitalize form-label">address</label>
-                            <textarea name="address" id="address" name="address" class="form-control">
+                            <textarea name="address" id="address" class="form-control">
                             </textarea>
                         </div>
 
@@ -81,7 +108,8 @@
 
                         <div>
                             <label for="exdate" class="text-capitalize form-label">expired date</label>
-                            <input type="text" id="exdate" name="exdate" class="form-control mb-2" required placeholder="Expired Date">
+                            <input type="text" id="exdate" name="exdate" class="form-control mb-2" required
+                                placeholder="Expired Date">
                         </div>
 
                         <div class="row row-cols-2 mb-1">
@@ -119,15 +147,17 @@
 
                 <div class="row row-cols-2 mb-4">
                     <div class="col">
-                        <label for="given" class="form-label text-capitalize">given by<span class="text-danger">*</span></label>
+                        <label for="given" class="form-label text-capitalize">given by<span
+                                class="text-danger">*</span></label>
                         <input type="text" name="given" id="given" class="form-control">
                     </div>
                     <div class="col">
-                        <label for="number" class="form-label text-capitalize">mobile number<span class="text-danger">*</span></label>
+                        <label for="number" class="form-label text-capitalize">mobile number<span
+                                class="text-danger">*</span></label>
                         <input type="text" name="number" id="number" class="form-control">
                     </div>
                 </div>
-                
+
             </form>
         </div>
 

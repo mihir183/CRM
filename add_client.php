@@ -1,5 +1,5 @@
-<?php include 'check_session.php'?>
-<?php include 'autoExpire_session.php'?>
+<?php include 'check_session.php' ?>
+<?php include 'autoExpire_session.php' ?>
 <!doctype html>
 <html lang="en">
 
@@ -8,12 +8,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <title>add client</title>
+    <title>Add Client</title>
   </head>
 
   <body>
 
     <?php include 'header.php'; ?>
+
+    <!-- Successs Alert -->
+    <?php if (!empty($_SESSION['success'])): ?>
+      <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+        <strong>Yeah</strong> <?= $_SESSION['success']; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <!-- Error Alert -->
+    <?php if (!empty($_SESSION['error'])): ?>
+      <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
+        <strong>Oops!</strong> <?= $_SESSION['error']; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 
     <div class="container mt-2">
       <div class="container mt-5 d-flex justify-content-between">
@@ -28,14 +46,14 @@
       <p class="text-danger">* Denotes compulsory fields & special symbol like <> " ' \ etc is not alow due to security
           reason</p>
 
-      <form action="" onsubmit="beforeSubmit(event)" id="myForm" method="post">
+      <form action="insert_client.php" onsubmit="beforeSubmit(event)" id="myForm" method="post">
         <!-- ROW 1 -->
         <div class="row mb-3">
           <div class="col">
             <label for="company" class="text-capitalize">
               company name<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="company" id="company" placeholder="COMPANY NAME" required>
+            <input type="text" class="form-control" name="company" id="company" placeholder="COMPANY NAME" autofocus>
           </div>
 
           <div class="col">
@@ -63,7 +81,8 @@
             <label for="mobile" class="text-capitalize">
               registered mobile<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Registered Mobile" maxlength="10" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
+            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Registered Mobile"
+            maxlength="10" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
             <p class="err text-danger small" id="err_mob"></p>
           </div>
 
@@ -72,7 +91,7 @@
               address<span class="text-danger form-label">*</span>
             </label>
             <textarea type="text" class="form-control" name="address" id="address" placeholder="Address"
-              required></textarea>  
+              required></textarea>
           </div>
 
           <div class="col">
@@ -93,7 +112,8 @@
 
           <div class="col">
             <label for="phone" class="text-capitalize">Phone</label>
-            <input type="number" class="form-control" name="phone" id="phone" maxlength="10" placeholder="Phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
+            <input type="number" class="form-control" name="phone" id="phone" maxlength="10" placeholder="Phone"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
             <p class="err text-danger small" id="err_pho"></p>
           </div>
 

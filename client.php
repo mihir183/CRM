@@ -1,4 +1,20 @@
-<?php include 'check_session.php'?>
+<?php include 'check_session.php' ?>
+
+<?php
+include 'db.php';
+
+$client = [];
+
+if ($conn) {
+  $stmt = $conn->prepare("SELECT * FROM client");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  while ($row = $result->fetch_assoc()) {
+    $clients[] = $row;
+  }
+  $stmt->close();
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -7,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <title>Home</title>
+    <title>Client</title>
   </head>
 
   <body>
@@ -30,37 +46,44 @@
     </div>
 
     <div class="container mt-5">
-      <table class="table">
-      <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>@social</td>
-          </tr>
-        </tbody>
-      </table>
+      <h5 class="text-primary">Client List</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark text-capitalize">
+            <tr>
+              <th>Company name</th>
+              <th>Country</th>
+              <th>registred mobile</th>
+              <th>city</th>
+              <th>Email</th>
+              <th>isActive</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (count($clients) > 0): ?>
+              <?php foreach ($clients as $index => $client): ?>
+                <tr>
+                  <!-- <td><?= $index + 1 ?></td> -->
+                  <td><?= htmlspecialchars($client['company_name']) ?></td>
+                  <td><?= htmlspecialchars($client['country']) ?></td>
+                  <td><?= htmlspecialchars($client['mobile']) ?></td>
+                  <td><?= htmlspecialchars($client['city']) ?></td>
+                  <td><?= htmlspecialchars($client['email']) ?></td>
+                  <td><?= htmlspecialchars($client['pin']) ?></td>
+                  <td><button class="btn btn-primary"></button></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="10" class="text-center">No clients found.</td>
+              </tr>
+            <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
     </div>
+
 
     <!-- Footer Start -->
     <?php include 'footer.php'; ?>

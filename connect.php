@@ -11,6 +11,7 @@ require 'PHPMailer/SMTP.php';
 require 'PHPMailer/PHPMailer.php';
 
 $mail = new PHPMailer(true);
+$sender = 'mihirvaghela1811@gmail.com';
 include 'db.php';
 
 if ($conn) {
@@ -18,32 +19,40 @@ if ($conn) {
     $user = trim($_POST['user'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $pass = trim($_POST['pass'] ?? '');
-    // $cpass = trim($_POST['cpass'] ?? '');
+    $cpass = trim($_POST['cpass'] ?? '');
     // $mob = trim($_POST['mob'] ?? '');
 
-    if(empty($user) || empty($email) || empty($pass)){
+    if(empty($user) || empty($email) || empty($pass) || $pass !== $cpass){
+        session_start();
+        $_SESSION['error'] = 'invalid enter data..!';
         header("Location: reg.php");
         exit();
     }else{
         // check the user if he/her already exist or not...!
-        $existUser = "SELECT * FROM users WHERE email = '$email' OR username = '$user'";
-        $run = mysqli_query($conn, $existUser);
+        $existUser = "SELECT * FROM users WHERE email = ? OR username = ? ";
+        $stmt = mysqli_prepare($conn,$existUser);
+        mysqli_stmt_bind_param($stmt,"ss",$email,$user);
+        mysqli_stmt_execute($stmt);
 
-        if (mysqli_num_rows($run) > 0) {
+        $run =  mysqli_stmt_get_result($stmt);
 
-            echo "<script type='text/javascript'>
-            alert('User already exists or email is taken.');
-            window.location.href='reg.php';
-            </script>";
+        if ($run && mysqli_num_rows($run) > 0) {
+
+            $_SESSION['error'] = '('.$email.') this user alredy registred..!';
+            header("Location: reg.php");
             exit();
 
         } else {
             $hashpass = password_hash($pass, PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO users (username,email,pass)VALUES('$user','$email','$hashpass')";
-            $result = mysqli_query($conn, $query);
+            $query = "INSERT INTO users (username,email,pass)VALUES(?,?,?)";
+            $stmt = mysqli_prepare($conn,$query);
+            $stmt->bind_param("sss",$user,$email,$hashedPass);
+            $stmt->execute();
 
-            if ($result) {
+            $res = mysqli_stmt_get_result($stmp);
+
+            if ($res && mysqli_num_rows($res) > 0) {
 
                 try {
                     //Server settings
@@ -57,9 +66,8 @@ if ($conn) {
                     $mail->Port = 465;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                     //Recipients
-                    $mail->setFrom('mihirvaghela1811@gmail.com', 'CRM');
+                    $mail->setFrom($sender, 'CRM');
                     $mail->addAddress($email, 'User');     //Add a recipient
-
 
                     //Content
                     $mail->isHTML(true);                                  //Set email format to HTML
@@ -79,10 +87,10 @@ if ($conn) {
                     exit();
                 }
             } else {
-                echo "<script type='text/javascript'>
-                alert('Register Failed..!');
-                window.location.href='reg.php';
-                </script>";
+                session_start();
+                $_SESSION['error'] = 'Registration fail. please try again.';
+                header("Location: reg.php");
+                exit();
             }
         }
     }
