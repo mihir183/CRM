@@ -1,5 +1,5 @@
-<?php include 'check_session.php'?>
-<?php include 'autoExpire_session.php'?>
+<?php require 'check_session.php'?>
+<?php require 'autoExpire_session.php'?>
 
 <!doctype html>
 <html lang="en">

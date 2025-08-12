@@ -1,5 +1,29 @@
 <?php include 'check_session.php' ?>
 <?php include 'autoExpire_session.php' ?>
+
+<?php include 'db.php';
+
+if ($conn) {
+
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $stmt = $conn->prepare("SELECT * FROM client WHERE cid = ?");
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $client = $result->fetch_assoc();
+
+    if (!$client) {
+      die("Client not found.");
+    }
+  } else {
+    header("Location: client.php");
+  }
+}
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -34,8 +58,8 @@
     <?php endif; ?>
 
     <div class="container mt-2">
-      <div class="container mt-5 d-flex justify-content-between">
-        <h4 class="text-primary text-capitalize text-start"><i class="fa-solid fa-user"></i> add client
+      <div class="container mt-5 mb-3 d-flex justify-content-between">
+        <h4 class="text-primary text-capitalize text-start"><i class="fa-solid fa-user"></i> edit client
         </h4>
         <a href="client.php" class="">
           <button class="btn btn-primary text-right">
@@ -43,31 +67,28 @@
         </a>
       </div>
 
-      <p class="text-danger">* Denotes compulsory fields & special symbol like <> " ' \ etc is not alow due to security
-          reason</p>
-
-      <form action="insert_client.php" onsubmit="beforeSubmit(event)" id="myForm" method="post">
+      <form action="update_client.php" id="myForm" method="post">
         <!-- ROW 1 -->
         <div class="row mb-3">
           <div class="col">
             <label for="company" class="text-capitalize">
               company name<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="company" id="company" placeholder="COMPANY NAME" autofocus>
+            <input type="text" class="form-control" name="company" value="<?php echo $client['company_name']; ?>" id="company" placeholder="COMPANY NAME" autofocus>
           </div>
 
           <div class="col">
             <label for="city" class="text-capitalize">
               city<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="city" id="city" placeholder="City" required>
+            <input type="text" class="form-control" name="city" id="city" placeholder="City" value="<?php echo $client['city']; ?>" required>
           </div>
 
           <div class="col">
             <label for="country" class="text-capitalize">
               country<span class="text-danger form-label">*</span>
             </label>
-            <select name="country" id="country" class="form-control">
+            <select name="country" id="country" class="form-control" value="<?php echo $client['coutry']; ?>">
               <option>Select Country</option>
               <option value="India" selected>India</option>
               <option value="US">US</option>
@@ -81,8 +102,8 @@
             <label for="mobile" class="text-capitalize">
               registered mobile<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Registered Mobile"
-            maxlength="10" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
+            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Registered Mobile"value="<?php echo $client['mobile']; ?>"
+              maxlength="10" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
             <p class="err text-danger small" id="err_mob"></p>
           </div>
 
@@ -90,15 +111,14 @@
             <label for="address" class="text-capitalize">
               address<span class="text-danger form-label">*</span>
             </label>
-            <textarea type="text" class="form-control" name="address" id="address" placeholder="Address"
-              required></textarea>
+            <textarea type="text" class="form-control" name="address" id="address" placeholder="Address" required></textarea>
           </div>
 
           <div class="col">
             <label for="email" class="text-capitalize">
               Email Address<span class="text-danger form-label">*</span>
             </label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value="<?php echo $client['email']; ?>" required>
           </div>
         </div>
         <!-- ROW 3 -->
@@ -107,19 +127,19 @@
             <label for="key" class="text-capitalize">
               Key Person<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="key" id="key" placeholder="Key Person" required>
+            <input type="text" class="form-control" name="key" id="key" placeholder="Key Person" value="<?php echo $client['key_person']; ?>" required>
           </div>
 
           <div class="col">
             <label for="phone" class="text-capitalize">Phone</label>
-            <input type="text" class="form-control" name="phone" id="phone" maxlength="10" placeholder="Phone"
+            <input type="text" class="form-control" name="phone" id="phone" maxlength="10" placeholder="Phone" value="<?php echo $client['phone']; ?>"
               oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
             <p class="err text-danger small" id="err_pho"></p>
           </div>
 
           <div class="col">
             <label for="pin" class="text-capitalize">Pin</label>
-            <input type="text" class="form-control" name="pin" id="pin" placeholder="Pin">
+            <input type="text" class="form-control" name="pin" id="pin" placeholder="Pin" value="<?php echo $client['pin']; ?>">
           </div>
         </div>
         <!-- ROW 4 -->
@@ -128,21 +148,21 @@
             <label for="product" class="text-capitalize">
               product<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="product" id="product" placeholder="Product" required>
+            <input type="text" class="form-control" name="product" id="product" placeholder="Product" value="<?php echo $client['product']; ?>" required>
           </div>
 
           <div class="col">
             <label for="variant" class="text-capitalize">
               variant<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="variant" id="variant" placeholder="Variant" required>
+            <input type="text" class="form-control" name="variant" id="variant" placeholder="Variant" value="<?php echo $client['variant']; ?>" required>
           </div>
 
           <div class="col">
             <label for="p_key" class="text-capitalize">
               product key<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="p_key" id="p_key" placeholder="Prodyct Key" required>
+            <input type="text" class="form-control" name="p_key" id="p_key" placeholder="Prodyct Key" value="<?php echo $client['p_key']; ?>" required>
           </div>
         </div>
         <!-- ROW 5 -->
@@ -151,21 +171,19 @@
             <label for="l_key" class="text-capitalize">
               license key<span class="text-danger form-label">*</span>
             </label>
-            <input type="text" class="form-control" name="l_key" id="l_key" placeholder="License Key" required>
+            <input type="text" class="form-control" name="l_key" id="l_key" placeholder="License Key" value="<?php echo $client['l_key']; ?>" required>
           </div>
         </div>
 
         <div class="row mb-5 flex-row-reverse">
           <div class="col col-4">
-            <button type="submit" class="btn btn-primary w-100 text-capitalize">add</button>
+            <button type="submit" class="btn btn-primary w-100 text-capitalize">update</button>
           </div>
         </div>
       </form>
     </div>
 
     <?php include 'footer.php'; ?>
-
-    <script src="js/client.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"

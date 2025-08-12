@@ -20,7 +20,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex gap-2" href="#">
+                <a class="navbar-brand d-flex gap-2" href="home.php">
                     <img src="assets/images/MNE.png" class="rounded rounded-1" alt="" width="40">
                     <h2 class="text-capitalize text-light">user</h2>
                 </a>

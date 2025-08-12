@@ -1,4 +1,5 @@
 <?php include 'check_session.php' ?>
+<?php include 'autoExpire_session.php' ?>
 <?php
 include 'db.php';
 
@@ -68,9 +69,10 @@ if ($conn) {
 
                         <label for="product" class="text-capitalize form-label">product<span
                                 class="text-danger">*</span></label>
-                        <select name="product" id="" class="form-control">
+                        <input name="product" id="product" class="form-control">
+                        <!-- <select name="product" id="product" class="form-control">
                             <option value="" class="text-capitalize">Select product</option>
-                        </select>
+                        </select> -->
 
                         <label for="complain" class="text-capitalize form-label">complain<span
                                 class="text-danger">*</span></label>
@@ -150,12 +152,21 @@ if ($conn) {
                     <div class="col">
                         <label for="given" class="form-label text-capitalize">given by<span
                                 class="text-danger">*</span></label>
-                        <input type="text" name="given" id="given" class="form-control">
+                        <input type="text" name="given" id="given" class="form-control" required>
                     </div>
                     <div class="col">
                         <label for="number" class="form-label text-capitalize">mobile number<span
                                 class="text-danger">*</span></label>
-                        <input type="text" name="number" id="number" class="form-control">
+                        <input type="text" name="number" id="number" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <div class="col col-4">
+                        <button class="btn btn-primary mb-5 text-capitalize w-100"><i class="fa-etch fa-solid fa-plus"></i> save</button>
+                    </div>
+                    <div class="col col-4">
+                        <button type="button" class="btn btn-primary mb-5 text-capitalize w-100">cancle</button>
                     </div>
                 </div>
 
@@ -173,7 +184,8 @@ if ($conn) {
                     mobile: '',
                     address: '',
                     city: '',
-                    email: ''
+                    email: '',
+                    product: ''
                 };
 
                 // If no value selected, just clear all fields
@@ -194,6 +206,7 @@ if ($conn) {
                             document.getElementById('address').value = data.client.address || '';
                             document.getElementById('city').value = data.client.city || '';
                             document.getElementById('email').value = data.client.email || '';
+                            document.getElementById('product').value = data.client.product || '';
                         } else {
                             alert('Client not found.');
                             for (const id in fields) {

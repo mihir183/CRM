@@ -23,7 +23,5 @@ function beforeSubmit(event) {
         
         if(isValid){
           document.getElementById("myForm").submit();
-        }else{
-          document.getElementById("myForm").reset();
         }
       }

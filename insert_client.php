@@ -35,7 +35,7 @@ if ($conn) {
         if ($stmt->execute()) {
             session_start();
             $_SESSION['success'] = "Client added successfully!";
-            header("Location: add_client.php");
+            header("Location: client.php");
             exit();
         } else {
             session_start();

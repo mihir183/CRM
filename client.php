@@ -1,20 +1,34 @@
-<?php include 'check_session.php' ?>
-
+<?php include 'check_session.php'; ?>
 <?php
 include 'db.php';
 
-$client = [];
+// Pagination settings
+$limit = 10;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
 
-if ($conn) {
-  $stmt = $conn->prepare("SELECT * FROM client");
-  $stmt->execute();
-  $result = $stmt->get_result();
-  while ($row = $result->fetch_assoc()) {
-    $clients[] = $row;
-  }
-  $stmt->close();
+// Count total records
+$totalStmt = $conn->prepare("SELECT COUNT(*) as total FROM client");
+$totalStmt->execute();
+$totalResult = $totalStmt->get_result();
+$totalRow = $totalResult->fetch_assoc();
+$totalClients = $totalRow['total'];
+$totalPages = ceil($totalClients / $limit);
+
+// Fetch paginated data
+$stmt = $conn->prepare("SELECT * FROM client LIMIT ?, ?");
+$stmt->bind_param("ii", $offset, $limit);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$clients = [];
+while ($row = $result->fetch_assoc()) {
+  $clients[] = $row;
 }
+
+$stmt->close();
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -30,12 +44,18 @@ if ($conn) {
     <!-- Header Start -->
     <?php include 'header.php'; ?>
 
+    <!-- Successs Alert -->
+    <?php if (!empty($_SESSION['success'])): ?>
+      <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+        <strong>Yeah</strong> <?= $_SESSION['success']; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
 
     <div class="container pt-2">
-
-      <p class="text-capitalized ms-3 fs-6 mb-4"><span class="text-primary"><i class="fa-solid fa-home"></i> home</span>
-        / <i class="fa-solid fa-user"></i> clent master</p>
-
+      <p class="text-capitalized ms-3 fs-6 mb-4"><span class="text-primary"><i class="fa-solid fa-home">
+          </i> home</span> / <i class="fa-solid fa-user"></i> client master</p>
       <div class="d-flex justify-content-between">
         <h4 class="text-primary text-capitalize"><i class="fa-solid fa-user"></i> client master </h4>
         <a href="add_client.php">
@@ -71,7 +91,9 @@ if ($conn) {
                   <td><?= htmlspecialchars($client['city']) ?></td>
                   <td><?= htmlspecialchars($client['email']) ?></td>
                   <td><?= htmlspecialchars($client['pin']) ?></td>
-                  <td><button class="btn btn-primary"></button></td>
+                  <td><a href="edit_client.php?id=<?php echo $client['cid'];?>">
+                      <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </a></td>
                 </tr>
               <?php endforeach; ?>
             <?php else: ?>
@@ -82,6 +104,31 @@ if ($conn) {
           </tbody>
         </table>
       </div>
+
+      <div class="mt-3">
+        <nav>
+          <ul class="pagination justify-content-center">
+            <?php if ($page > 1): ?>
+              <li class="page-item">
+                <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+              </li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+              <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+              </li>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+              <li class="page-item">
+                <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+              </li>
+            <?php endif; ?>
+          </ul>
+        </nav>
+      </div>
+
     </div>
 
 
