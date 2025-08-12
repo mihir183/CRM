@@ -39,15 +39,6 @@ if ($conn) {
 
     <?php include 'header.php'; ?>
 
-    <!-- Successs Alert -->
-    <?php if (!empty($_SESSION['success'])): ?>
-      <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
-        <strong>Yeah</strong> <?= $_SESSION['success']; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      <?php unset($_SESSION['success']); ?>
-    <?php endif; ?>
-
     <!-- Error Alert -->
     <?php if (!empty($_SESSION['error'])): ?>
       <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
@@ -89,8 +80,8 @@ if ($conn) {
               country<span class="text-danger form-label">*</span>
             </label>
             <select name="country" id="country" class="form-control" value="<?php echo $client['coutry']; ?>">
-              <option>Select Country</option>
-              <option value="India" selected>India</option>
+              <option disabled>--Select Country--</option>
+              <option value="India">India</option>
               <option value="US">US</option>
               <option value="Russia">Russia</option>
             </select>
@@ -177,6 +168,7 @@ if ($conn) {
 
         <div class="row mb-5 flex-row-reverse">
           <div class="col col-4">
+            <input type="hidden" name="cid" value="<?php echo $client['cid']?>">
             <button type="submit" class="btn btn-primary w-100 text-capitalize">update</button>
           </div>
         </div>

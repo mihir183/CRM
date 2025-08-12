@@ -67,9 +67,9 @@
             <label for="country" class="text-capitalize">
               country<span class="text-danger form-label">*</span>
             </label>
-            <select name="country" id="country" class="form-control">
-              <option>Select Country</option>
-              <option value="India" selected>India</option>
+            <select name="country" id="country" class="form-control" required>
+              <option disabled selected> --Select Country--</option>
+              <option value="India">India</option>
               <option value="US">US</option>
               <option value="Russia">Russia</option>
             </select>
