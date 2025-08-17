@@ -84,28 +84,28 @@ if ($conn) {
                         <div class="row row-cols-2 mb-1">
                             <div class="col">
                                 <label for="name" class="text-capitalize form-label">name</label>
-                                <input type="text" id="name" name="name" required class="form-control mb-2">
+                                <input type="text" id="name" name="name" required class="form-control mb-2" readOnly>
                             </div>
                             <div class="col">
                                 <label for="mobile" class="text-capitalize form-label">registered mobile</label>
-                                <input type="text" id="mobile" name="mobile" required class="form-control mb-2">
+                                <input type="text" id="mobile" name="mobile" required class="form-control mb-2" readOnly>
                             </div>
                         </div>
 
                         <div class="address mb-1">
                             <label for="address" class="text-capitalize form-label">address</label>
-                            <textarea name="address" id="address" class="form-control">
+                            <textarea name="address" id="address" class="form-control" readOnly>
                             </textarea>
                         </div>
 
                         <div class="row row-cols-2 mb-1">
                             <div class="col">
                                 <label for="city" class="text-capitalize form-label">city</label>
-                                <input type="text" id="city" name="city" class="form-control mb-2" required>
+                                <input type="text" id="city" name="city" class="form-control mb-2" required readOnly>
                             </div>
                             <div class="col">
                                 <label for="email" class="text-capitalize form-label">email address</label>
-                                <input type="text" id="email" name="email" class="form-control mb-2" required>
+                                <input type="text" id="email" name="email" class="form-control mb-2" required readOnly>
                             </div>
                         </div>
 

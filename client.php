@@ -67,6 +67,30 @@ $stmt->close();
 
     <div class="container mt-3">
       <h5 class="text-primary">Client List</h5>
+      <!-- Pagging Setting
+      <div class="mt-3">
+        <nav>
+          <ul class="pagination justify-content-start">
+            <?php if ($page > 1): ?>
+              <li class="page-item">
+                <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+              </li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+              <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+              </li>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+              <li class="page-item">
+                <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+              </li>
+            <?php endif; ?>
+          </ul>
+        </nav>
+      </div> -->
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
           <thead class="table-dark text-capitalize">
@@ -91,7 +115,7 @@ $stmt->close();
                   <td><?= htmlspecialchars($client['city']) ?></td>
                   <td><?= htmlspecialchars($client['email']) ?></td>
                   <td><?= htmlspecialchars($client['pin']) ?></td>
-                  <td><a href="edit_client.php?id=<?php echo $client['cid'];?>">
+                  <td><a href="edit_client.php?id=<?php echo $client['cid']; ?>">
                       <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
                     </a></td>
                 </tr>
@@ -105,6 +129,7 @@ $stmt->close();
         </table>
       </div>
 
+      <!-- Pagging Setting -->
       <div class="mt-3">
         <nav>
           <ul class="pagination justify-content-center">
