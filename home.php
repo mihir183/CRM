@@ -1,6 +1,5 @@
 <?php require 'check_session.php'?>
 <?php require 'autoExpire_session.php'?>
-
 <!doctype html>
 <html lang="en">
   <head>

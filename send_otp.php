@@ -31,19 +31,16 @@ if (!empty($email)) {
 
         try {
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;              //Enable verbose debug output
-            $mail->isSMTP();                                    //Send using SMTP
-            $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth = true;                             //Enable SMTP authentication
-            $mail->Username = 'mihirvaghela1811@gmail.com';     //SMTP username
-            $mail->Password = 'lhwn dpyi awzt vpuy';            //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    //Enable implicit TLS encryption
-            $mail->Port = 465;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'mihirvaghela1811@gmail.com';   // Your Gmail
+            $mail->Password = 'tkgg xrac ejwe sxuw';    // App Password only
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use TLS
+            $mail->Port = 587;
 
-            //Recipients
             $mail->setFrom('mihirvaghela1811@gmail.com', 'CRM');
-            $mail->addAddress($email, 'User');     //Add a recipient
-
+            $mail->addAddress($email, 'User');
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML

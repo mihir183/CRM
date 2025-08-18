@@ -1,4 +1,5 @@
-<?php include 'check_session.php'; ?>
+<?php include 'check_session.php' ?>
+<?php include 'autoExpire_session.php' ?>
 <?php
 include 'db.php';
 
@@ -59,7 +60,7 @@ $stmt->close();
       <div class="d-flex justify-content-between">
         <h4 class="text-primary text-capitalize"><i class="fa-solid fa-user"></i> client master </h4>
         <a href="add_client.php">
-          <button class="btn btn-primary text-capitalize"><i class="fa-solid fa-user"></i> add client master</button>
+          <button class="btn btn-primary text-capitalize"><i class="fa-solid fa-user"></i> add client</button>
         </a>
       </div>
 

@@ -1,6 +1,5 @@
 <?php include 'check_session.php' ?>
 <?php include 'autoExpire_session.php' ?>
-
 <?php include 'db.php';
 
 if ($conn) {
