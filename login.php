@@ -28,6 +28,15 @@ if ($conn) {
             if (password_verify($pass, $row['pass'])) {
                 session_start();
 
+                $logs_id = "LOGS" . date("YmdHis") . uniqid();
+                $log_time = date("d-m-Y H:i:s");
+
+                $query2 = "INSERT into login_logs(logs_id,name,log_time) VALUES(?,?,?)";
+                $stmt = $conn->prepare($query2);
+                $stmt->bind_param("sss", $logs_id, $row['username'], $log_time);
+                $stmt->execute();
+                $stmt->close();
+
                 $_SESSION["user"] = $row['username'];
                 $_SESSION['last_activity'] = time();
 
@@ -35,6 +44,7 @@ if ($conn) {
                     alert('Login Successful...!');
                     window.location.href='home.php';
                     </script>";
+
                     
             } else {
                 session_start();

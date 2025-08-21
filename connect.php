@@ -11,8 +11,9 @@ require 'PHPMailer/SMTP.php';
 require 'PHPMailer/PHPMailer.php';
 
 $mail = new PHPMailer(true);
-$sender = 'mihirvaghela1811@gmail.com';  //Enter Email
-include 'db.php';
+
+require 'db.php';
+require 'secret.php';
 
 if ($conn) {
 
@@ -66,8 +67,8 @@ if ($conn) {
                             $mail->isSMTP();                                    //Send using SMTP
                             $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
                             $mail->SMTPAuth = true;                             //Enable SMTP authentication
-                            $mail->Username = 'mihirvaghela1811@gmail.com';     //SMTP username
-                            $mail->Password = 'lhwn dpyi awzt vpuy';            //SMTP password
+                            $mail->Username = $sender;     
+                            $mail->Password = $EPassword;           
                             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    //Enable implicit TLS encryption
                             $mail->Port = 465;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         

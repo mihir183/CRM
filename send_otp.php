@@ -9,6 +9,8 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/SMTP.php';
 require 'PHPMailer/PHPMailer.php';
 
+require 'secret.php';
+
 $mail = new PHPMailer(true);
 
 $email = trim($_POST['email']);
@@ -34,12 +36,12 @@ if (!empty($email)) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'mihirvaghela1811@gmail.com';   // Your Gmail
-            $mail->Password = 'tkgg xrac ejwe sxuw';    // App Password only
+            $mail->Username = $sender;   // Your Gmail
+            $mail->Password = $EPassword;    // App Password only
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use TLS
             $mail->Port = 587;
 
-            $mail->setFrom('mihirvaghela1811@gmail.com', 'CRM');
+            $mail->setFrom($sender, 'CRM');
             $mail->addAddress($email, 'User');
 
             //Content
