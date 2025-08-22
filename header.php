@@ -12,16 +12,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="icon" href="assets/images/logo.png" type="image/png">
+        <link rel="short icon" href="assets/images/MNE.png" />
         <link rel="stylesheet" href="assets/css/header.css">
     </head>
 
     <body>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex gap-2" href="home.php">
-                    <img src="assets/images/MNE.png" class="rounded rounded-1" alt="" width="40">
+                <a class="navbar-brand d-flex gap-2 align-items-center" href="home.php">
+                    <img src="assets/images/MNE.png" class="rounded rounded-1" alt="" width="30" height="30">
                     <h2 class="text-capitalize text-light">user</h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
