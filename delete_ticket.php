@@ -29,6 +29,7 @@ $del = $conn->prepare("DELETE FROM tickets WHERE t_id=?");
 $del->bind_param("i", $t_id);
 
 if ($del->execute()) {
+    $_SESSION['success'] = "Product deleted successfully!";
     header("Location: ticket_register.php");
     exit();
 } else {

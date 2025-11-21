@@ -31,6 +31,15 @@ if ($conn) {
 
     <?php include 'header.php'; ?>
 
+    <!-- Alert Message -->
+    <?php if (!empty($_SESSION['success'])): ?>
+      <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+        <strong>Yeah</strong> <?= $_SESSION['success']; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
     <div class="container mt-5">
 
       <div class="d-flex justify-content-between align-items-center">

@@ -47,7 +47,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Add Product</button>
-        <a href="product_page.php" class="btn btn-secondary">Cancel</a>
+        <a href="product.php" class="btn btn-secondary">Cancel</a>
 
     </form>
 

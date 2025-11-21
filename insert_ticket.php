@@ -10,17 +10,17 @@ if (!$conn) {
 }
 
 // Collect Inputs
-$date            = trim($_POST['date']);
-$ticket_client   = trim($_POST['ticket_client']);  // Name of the client
-$product         = trim($_POST['product']);
-$complain        = trim($_POST['complain']);
-$serial_number   = trim($_POST['serial_number']);
-$remark          = trim($_POST['remark']);
-$given_by        = trim($_POST['given_by']);
-$mobile          = trim($_POST['mobile']);  
+$date = trim($_POST['date']);
+$ticket_client = trim($_POST['ticket_client']);  // Name of the client
+$product = trim($_POST['product']);
+$complain = trim($_POST['complain']);
+$serial_number = trim($_POST['serial_number']);
+$remark = trim($_POST['remark']);
+$given_by = trim($_POST['given_by']);
+$mobile = trim($_POST['mobile']);
 
 // Auto-filled client data
-$client_mobile   = trim($_POST['client_mobile']);  // Only mobile needed
+$client_mobile = trim($_POST['client_mobile']);  // Only mobile needed
 
 // Required Validation
 if (empty($date) || empty($ticket_client) || empty($product) || empty($complain) || empty($given_by) || empty($mobile)) {
@@ -40,7 +40,7 @@ if (!preg_match("/^[0-9]{10}$/", $client_mobile)) {
 function uploadImage($key)
 {
     if (!isset($_FILES[$key]) || $_FILES[$key]['error'] !== UPLOAD_ERR_OK) {
-        return ""; 
+        return "";
     }
 
     $allowed = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
@@ -105,9 +105,9 @@ if ($stmt->execute()) {
 
     $data = array(
         "sender_id" => "TXTIND",
-        "message"   => $sms_message,
-        "route"     => "v3",
-        "numbers"   => $client_mobile
+        "message" => $sms_message,
+        "route" => "v3",
+        "numbers" => "$client_mobile"  // ensure it's a string
     );
 
     $curl = curl_init();
@@ -125,9 +125,19 @@ if ($stmt->execute()) {
     ));
 
     $response = curl_exec($curl);
-    curl_close($curl);
 
-    $_SESSION['success'] = "Ticket added successfully!";
+    if ($response === false) {
+        $_SESSION['error'] = "SMS failed: " . curl_error($curl);
+    } else {
+        $res_data = json_decode($response, true);
+        if ($res_data['return'] === true) {
+            $_SESSION['success'] = "Ticket added successfully! SMS sent.";
+        } else {
+            $_SESSION['error'] = "Ticket added, but SMS failed: " . ($res_data['message'] ?? 'Unknown error');
+        }
+    }
+
+    curl_close($curl);
     header("Location: ticket_register.php");
 
 } else {

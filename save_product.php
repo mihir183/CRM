@@ -36,7 +36,7 @@ $stmt = $conn->prepare("INSERT INTO products (p_name, p_path, variant, product_k
 $stmt->bind_param("sssss", $p_name, $newName, $variant, $product_key, $licence_key);
 
 if ($stmt->execute()) {
-    header("Location: product_page.php");
+    header("Location: add_product.php");
     exit();
 } else {
     echo "DB Error: " . $stmt->error;
