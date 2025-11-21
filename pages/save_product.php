@@ -23,7 +23,7 @@ if (!in_array($ext, $allowed)) {
 }
 
 $newName = time() . "_" . uniqid() . "." . $ext;
-$uploadPath = "uploads/products/";
+$uploadPath = "../uploads/products/";
 
 if (!is_dir($uploadPath)) {
     mkdir($uploadPath, 0777, true);

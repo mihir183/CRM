@@ -3,6 +3,17 @@ session_start();
 include 'db.php';
 require 'secret.php';
 
+// -----------------------------------
+//  TWILIO CONFIG
+// -----------------------------------
+require __DIR__ . '../vendor/autoload.php';
+use Twilio\Rest\Client;
+
+$twilio_sid      = $SID;          // change
+$twilio_token    = $TTOKEN;           // change
+$twilio_whatsapp = "whatsapp:+14155238886";     // Twilio sandbox number
+
+
 if (!$conn) {
     $_SESSION['error'] = "Database connection failed!";
     header("Location: add_ticket.php");
@@ -11,7 +22,7 @@ if (!$conn) {
 
 // Collect Inputs
 $date = trim($_POST['date']);
-$ticket_client = trim($_POST['ticket_client']);  // Name of the client
+$ticket_client = trim($_POST['ticket_client']);
 $product = trim($_POST['product']);
 $complain = trim($_POST['complain']);
 $serial_number = trim($_POST['serial_number']);
@@ -19,8 +30,8 @@ $remark = trim($_POST['remark']);
 $given_by = trim($_POST['given_by']);
 $mobile = trim($_POST['mobile']);
 
-// Auto-filled client data
-$client_mobile = trim($_POST['client_mobile']);  // Only mobile needed
+// Only client mobile needed
+$client_mobile = trim($_POST['client_mobile']);
 
 // Required Validation
 if (empty($date) || empty($ticket_client) || empty($product) || empty($complain) || empty($given_by) || empty($mobile)) {
@@ -29,14 +40,17 @@ if (empty($date) || empty($ticket_client) || empty($product) || empty($complain)
     exit();
 }
 
-// Client mobile validation
+// Mobile Number Validation
 if (!preg_match("/^[0-9]{10}$/", $client_mobile)) {
     $_SESSION['error'] = "Enter valid 10-digit client mobile number.";
     header("Location: add_ticket.php");
     exit();
 }
 
-// Upload Function
+
+// -----------------------------------
+//  FILE UPLOAD FUNCTION
+// -----------------------------------
 function uploadImage($key)
 {
     if (!isset($_FILES[$key]) || $_FILES[$key]['error'] !== UPLOAD_ERR_OK) {
@@ -65,12 +79,16 @@ function uploadImage($key)
     }
 }
 
+
 // Upload images
 $img1 = uploadImage('img1');
 $img2 = uploadImage('img2');
 $img3 = uploadImage('img3');
 
-// Insert Query
+
+// -----------------------------------
+//  DATABASE INSERT
+// -----------------------------------
 $stmt = $conn->prepare("
     INSERT INTO tickets 
     (date, ticket_client, product, complain, serial_number, remark, img1, img2, img3, given_by, mobile, client_mobile)
@@ -96,52 +114,44 @@ $stmt->bind_param(
 if ($stmt->execute()) {
 
     // -----------------------------------
-    //  SEND SMS ONLY TO CLIENT MOBILE
+    //  SEND WHATSAPP MESSAGE USING TWILIO
     // -----------------------------------
 
-    $api_key = $FAST2SMS;
+    $client = new Client($twilio_sid, $twilio_token);
 
-    $sms_message = "Your ticket has been registered.\nClient: $ticket_client\nProduct: $product\nIssue: $complain\n- Support Team";
+    $to_whatsapp = "whatsapp:+91" . $client_mobile;
 
-    $data = array(
-        "sender_id" => "TXTIND",
-        "message" => $sms_message,
-        "route" => "v3",
-        "numbers" => "$client_mobile"  // ensure it's a string
-    );
+    $message_text =
+        "✅ *New Ticket Registered!*\n\n" .
+        "🧑 Client: $ticket_client\n" .
+        "📦 Product: $product\n" .
+        "⚠ Issue: $complain\n" .
+        "🔢 Serial No: $serial_number\n" .
+        "📝 Remark: $remark\n\n" .
+        "Thank you.\n- Support Team";
 
-    $curl = curl_init();
+    try {
+        $message = $client->messages->create(
+            $to_whatsapp,
+            [
+                'from' => $twilio_whatsapp,
+                'body' => $message_text
+            ]
+        );
 
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode($data),
-        CURLOPT_HTTPHEADER => array(
-            "authorization: $api_key",
-            "accept: */*",
-            "content-type: application/json"
-        ),
-    ));
+        $_SESSION['success'] = "Ticket added successfully! WhatsApp message sent.";
 
-    $response = curl_exec($curl);
-
-    if ($response === false) {
-        $_SESSION['error'] = "SMS failed: " . curl_error($curl);
-    } else {
-        $res_data = json_decode($response, true);
-        if ($res_data['return'] === true) {
-            $_SESSION['success'] = "Ticket added successfully! SMS sent.";
-        } else {
-            $_SESSION['error'] = "Ticket added, but SMS failed: " . ($res_data['message'] ?? 'Unknown error');
-        }
+    } catch (Exception $e) {
+        $_SESSION['error'] = "Ticket added but WhatsApp failed: " . $e->getMessage();
     }
 
-    curl_close($curl);
     header("Location: ticket_register.php");
+    exit();
 
 } else {
+
     $_SESSION['error'] = "Database Error: " . $stmt->error;
     header("Location: add_ticket.php");
+    exit();
 }
 ?>
