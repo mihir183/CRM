@@ -15,7 +15,7 @@ $products = mysqli_query($conn, "SELECT p_id, p_name FROM products ORDER BY p_na
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <title>Add Client</title>
-  <link rel="short icon" href="assets/images/MNE.png" />
+  <link rel="short icon" href="../assets/images/MNE.png" />
 </head>
 
 <body>
