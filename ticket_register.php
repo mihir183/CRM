@@ -51,6 +51,7 @@ if ($conn) {
             <th>ID</th>
             <th>Client</th>
             <th>Product</th>
+            <th>status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -63,12 +64,15 @@ if ($conn) {
                 <td><?= $t['t_id']; ?></td>
                 <td><?= $t['ticket_client']; ?></td>
                 <td><?= $t['product']; ?></td>
+                <td><?= $t['status']; ?></td>
 
                 <td>
                   <div class="btn-group">
-                    <button class="btn btn-info">view</button>
-                    <a href="update_ticket.php?t_id=<?= $t['t_id']; ?>" class="btn btn-warning">
-                      Edit
+                    <button class="btn btn-info">View</button>
+                    <a href="update_ticket.php?t_id=<?= $t['t_id']; ?>" class="btn btn-warning">Edit</a>
+                    <a href="delete_ticket.php?t_id=<?= $t['t_id']; ?>" class="btn btn-danger"
+                      onclick="return confirm('Are you sure you want to delete this ticket?');">
+                      Delete
                     </a>
                   </div>
                 </td>

@@ -32,6 +32,9 @@ if(empty($_SESSION["email"])){
             <input type="text" class="form-control mb-2" name="pass" placeholder="Enter password" autofocus required>
             <input type="text" class="form-control mb-2" name="cpass" placeholder="Enter password" autofocus required>
             <button class="center mt-2 btn btn-primary text-capitalize w-auto">change password</button>
+            <a href="index.php">
+                <button type="button" class="center mt-2 btn btn-dark text-capitalize w-100">back</button>
+            </a>
         </form>
     </div>
 

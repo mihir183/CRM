@@ -27,6 +27,21 @@
         </div>
 
         <div class="mb-3">
+            <label>Variant *</label>
+            <input type="text" name="variant" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Product Key *</label>
+            <input type="text" name="product_key" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Licence Key *</label>
+            <input type="text" name="licence_key" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
             <label>Select File *</label>
             <input type="file" name="p_file" class="form-control" required>
         </div>

@@ -29,6 +29,7 @@ if (empty($_SESSION["otp"])) {
         ?>
 
         <div class="container w-25 mt-5">
+            <h2>Enter OTP</h2>
             <form action="verify_otp.php" method="post">
                 <input type="text" class="form-control mb-2" name="otp" placeholder="Enter OTP" autofocus required>
                 <p class="text-capitalize text-secondary">(OTP used only once time)</p>

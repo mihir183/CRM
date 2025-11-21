@@ -46,6 +46,10 @@ if (isset($_POST['update'])) {
     $product = trim($_POST['product']);
     $complain = trim($_POST['complain']);
     $status = trim($_POST['status']);
+    $serial_number = trim($_POST['serial_number']);
+    $remark = trim($_POST['remark']);
+    $given_by = trim($_POST['given_by']);
+    $client_mobile = trim($_POST['client_mobile']);
 
     // Upload new images (optional)
     $img1 = uploadImage('img1');
@@ -62,17 +66,25 @@ if (isset($_POST['update'])) {
         product=?, 
         complain=?, 
         status=?, 
+        serial_number=?,
+        remark=?,
+        given_by=?,
+        client_mobile=?,
         img1=?, 
         img2=?, 
         img3=? 
         WHERE t_id=?");
 
     $up->bind_param(
-        "sssssssi",
+        "sssssssssssi",
         $ticket_client,
         $product,
         $complain,
         $status,
+        $serial_number,
+        $remark,
+        $given_by,
+        $client_mobile,
         $img1,
         $img2,
         $img3,
@@ -102,7 +114,7 @@ if (isset($_POST['update'])) {
     <h3 class="text-primary">Update Ticket</h3>
     <hr>
 
-    <form method="POST" enctype="multipart/form-data" class=" mb-5">
+    <form method="POST" enctype="multipart/form-data" class="mb-5">
 
         <div class="mb-3">
             <label>Client *</label>
@@ -117,6 +129,26 @@ if (isset($_POST['update'])) {
         <div class="mb-3">
             <label>Complain *</label>
             <textarea name="complain" class="form-control" required><?= $ticket['complain'] ?></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Serial Number</label>
+            <input type="text" name="serial_number" class="form-control" value="<?= $ticket['serial_number'] ?? '' ?>">
+        </div>
+
+        <div class="mb-3">
+            <label>Remark</label>
+            <input type="text" name="remark" class="form-control" value="<?= $ticket['remark'] ?? '' ?>">
+        </div>
+
+        <div class="mb-3">
+            <label>Given By</label>
+            <input type="text" name="given_by" class="form-control" value="<?= $ticket['given_by'] ?? '' ?>">
+        </div>
+
+        <div class="mb-3">
+            <label>Client Mobile</label>
+            <input type="text" name="client_mobile" class="form-control" value="<?= $ticket['client_mobile'] ?? '' ?>">
         </div>
 
         <!-- Status Dropdown -->

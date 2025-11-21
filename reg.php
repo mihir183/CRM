@@ -88,7 +88,8 @@
 
                 <!-- Footer -->
                 <p class="text-end mb-1">
-                    <i class="fa-solid fa-code me-1"></i> Developed by: <a href="#">Mihir Vaghela</a>
+                    <!-- <i class="fa-solid fa-code me-1"></i> Developed by: <a href="#" class="text-capitalize">Mihir Vaghela</a> -->
+                    <i class="fa-solid fa-code me-1"></i> Developed by: <a href="#" class="text-capitalize">lj student</a>
                 </p>
                 <p class="text-end">
                     Already have an account? <a href="index.php">Login</a>

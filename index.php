@@ -38,7 +38,7 @@ session_start();
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
 
-        <div class="container my-5 p-4 border rounded-3 shadow-sm">
+        <div class="container my-5 p-4 border rounded-3 shadow-sm ">
             <img src="assets/images/lj_logo.png" class="mb-3" alt="LJ Logo" width="100%" height="100">
             <h3 class="text-primary text-capitalize mb-1">
                 <i class="fa-solid fa-lock"></i> Sign In
@@ -82,7 +82,8 @@ session_start();
                 <!-- Footer -->
                 <div class="text-end mt-4">
                     <p class="mb-1">
-                        <i class="fa-solid fa-code"></i> Developed by: <a href="#">Mihir Vaghela</a>
+                        <!-- <i class="fa-solid fa-code"></i> Developed by: <a href="#">Mihir Vaghela</a> -->
+                        <i class="fa-solid fa-code"></i> Developed by: <a href="#">LJ Student</a>
                     </p>
                     <p class="mb-0">
                         Don't have an account? <a href="reg.php">Sign up</a>

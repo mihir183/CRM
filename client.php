@@ -97,12 +97,14 @@ $stmt->close();
         <table class="table table-bordered table-striped table-hover">
           <thead class="table-dark text-capitalize">
             <tr>
+              <th>sr</th>
+              <th>client name</th>
               <th>Company name</th>
-              <th>Country</th>
+              <!-- <th>Country</th> -->
               <th>registred mobile</th>
-              <th>city</th>
+              <!-- <th>city</th> -->
               <th>Email</th>
-              <th>isActive</th>
+              <th>product key</th>
               <th>action</th>
             </tr>
           </thead>
@@ -110,13 +112,14 @@ $stmt->close();
             <?php if (count($clients) > 0): ?>
               <?php foreach ($clients as $index => $client): ?>
                 <tr>
-                  <!-- <td><?= $index + 1 ?></td> -->
+                  <td><?= $index + 1 ?></td>
+                  <td><?= htmlspecialchars($client['key_person']) ?></td>
                   <td><?= htmlspecialchars($client['company_name']) ?></td>
-                  <td><?= htmlspecialchars($client['country']) ?></td>
+                  <!-- <td><?= htmlspecialchars($client['country']) ?></td> -->
                   <td><?= htmlspecialchars($client['mobile']) ?></td>
-                  <td><?= htmlspecialchars($client['city']) ?></td>
+                  <!-- <td><?= htmlspecialchars($client['city']) ?></td> -->
                   <td><?= htmlspecialchars($client['email']) ?></td>
-                  <td><?= htmlspecialchars($client['pin']) ?></td>
+                  <td><?= htmlspecialchars($client['p_key']) ?></td>
                   <td><a href="edit_client.php?id=<?php echo $client['cid']; ?>">
                       <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
                     </a></td>

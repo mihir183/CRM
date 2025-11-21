@@ -91,13 +91,14 @@ if ($conn) {
                     <div class="col">
                         <div class="row row-cols-2 mb-1">
                             <div class="col">
-                                <label for="name" class="text-capitalize form-label">name</label>
-                                <input type="text" id="name" name="name" required class="form-control mb-2" readOnly>
+                                <label for="client_name" class="text-capitalize form-label">name</label>
+                                <input type="text" id="client_name" name="client_name" required
+                                    class="form-control mb-2" readOnly>
                             </div>
                             <div class="col">
-                                <label for="mobile" class="text-capitalize form-label">registered mobile</label>
-                                <input type="text" id="mobile" name="mobile" required class="form-control mb-2"
-                                    readOnly>
+                                <label for="client_mobile" class="text-capitalize form-label">registered mobile</label>
+                                <input type="text" id="client_mobile" name="client_mobile" required
+                                    class="form-control mb-2" readOnly>
                             </div>
                         </div>
 
@@ -188,50 +189,35 @@ if ($conn) {
             document.getElementById('client').addEventListener('change', function () {
                 const keyPerson = this.value;
 
-                // Elements to clear or fill
-                const fields = {
-                    name: '',
-                    mobile: '',
-                    address: '',
-                    city: '',
-                    email: '',
-                    product: ''
-                };
+                const fields = ["client_name", "client_mobile", "address", "city", "email", "product"];
 
-                // If no value selected, just clear all fields
                 if (!keyPerson) {
-                    for (const id in fields) {
-                        document.getElementById(id).value = '';
-                    }
+                    fields.forEach(id => document.getElementById(id).value = "");
                     return;
                 }
 
-                // Otherwise, fetch client data
                 fetch('get_client_data.php?key_person=' + encodeURIComponent(keyPerson))
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
-                            document.getElementById('name').value = data.client.key_person || '';
-                            document.getElementById('mobile').value = data.client.mobile || '';
+                            document.getElementById('client_name').value = data.client.key_person || '';
+                            document.getElementById('client_mobile').value = data.client.mobile || '';
                             document.getElementById('address').value = data.client.address || '';
                             document.getElementById('city').value = data.client.city || '';
                             document.getElementById('email').value = data.client.email || '';
                             document.getElementById('product').value = data.client.product || '';
                         } else {
-                            alert('Client not found.');
-                            for (const id in fields) {
-                                document.getElementById(id).value = '';
-                            }
+                            fields.forEach(id => document.getElementById(id).value = "");
+                            alert("Client not found!");
                         }
                     })
-                    .catch(error => {
-                        console.error('Error fetching client:', error);
-                        for (const id in fields) {
-                            document.getElementById(id).value = '';
-                        }
+                    .catch(err => {
+                        console.error(err);
+                        fields.forEach(id => document.getElementById(id).value = "");
                     });
             });
         </script>
+
 
 
         <?php include 'footer.php' ?>
