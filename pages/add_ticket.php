@@ -177,7 +177,9 @@ if ($conn) {
                                 class="fa-etch fa-solid fa-plus"></i> save</button>
                     </div>
                     <div class="col col-4">
-                        <button type="button" class="btn btn-primary mb-5 text-capitalize w-100">cancle</button>
+                        <a href="ticket_register.php">
+                            <button type="button" class="btn btn-primary mb-5 text-capitalize w-100">cancle</button>
+                        </a>
                     </div>
                 </div>
 

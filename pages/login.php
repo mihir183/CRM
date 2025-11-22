@@ -39,13 +39,21 @@ if ($conn) {
 
                 $_SESSION["user"] = $row['username'];
                 $_SESSION['last_activity'] = time();
+                
+                if ($row['role'] == 1) {
+                    // Admin
+                    echo "<script type='text/javascript'>
+                            alert('Login Successful...!');
+                            window.location.href='../admin/dashboard.php';
+                        </script>";
+                } else {
+                    // Normal User
+                    echo "<script type='text/javascript'>
+                            alert('Login Successful...!');
+                            window.location.href='home.php';
+                        </script>";
+                }
 
-                echo "<script type='text/javascript'>
-                    alert('Login Successful...!');
-                    window.location.href='home.php';
-                    </script>";
-
-                    
             } else {
                 session_start();
                 $_SESSION['error'] = 'Username OR Password is Invalid';

@@ -17,7 +17,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="assets/css/index.css">
+        <link rel="stylesheet" href="../assets/css/index.css">
         <title>CRM - Sign Up</title>
     </head>
 
@@ -33,7 +33,7 @@
         <?php endif; ?>
 
         <div class="container px-3 my-5 pt-4 pb-3 border border-1 rounded-2 shadow-sm">
-            <img src="assets/images/lj_logo.png" class="img-fluid mb-3" alt="Logo" style="max-height: 100px;">
+            <img src="../assets/images/lj_logo.png" class="img-fluid mb-3" alt="Logo" style="max-height: 100px;">
 
             <h3 class="text-primary text-capitalize mb-2">
                 <i class="fa-solid fa-lock me-1"></i> Sign Up

@@ -19,10 +19,10 @@ session_start();
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="assets/css/index.css">
+        <link rel="stylesheet" href="../assets/css/index.css">
 
         <!-- Logo (CRM) -->
-        <link rel="short icon" href="assets/images/MNE.png" />
+        <link rel="short icon" href="../assets/images/MNE.png" />
 
         <title>CRM</title>
     </head>
@@ -39,7 +39,7 @@ session_start();
         <?php endif; ?>
 
         <div class="container my-5 p-4 border rounded-3 shadow-sm ">
-            <img src="assets/images/lj_logo.png" class="mb-3" alt="LJ Logo" width="100%" height="100">
+            <img src="../assets/images/lj_logo.png" class="mb-3" alt="LJ Logo" width="100%" height="100">
             <h3 class="text-primary text-capitalize mb-1">
                 <i class="fa-solid fa-lock"></i> Sign In
             </h3>
@@ -96,6 +96,9 @@ session_start();
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
             crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     </body>
 
 </html>

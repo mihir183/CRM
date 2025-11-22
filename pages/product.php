@@ -18,7 +18,7 @@
 
     <div class="d-flex justify-content-between">
         <h4 class="text-primary">Product List</h4>
-        <a href="add_product.php" class="btn btn-primary">+ Add Product</a>
+        <!-- <a href="add_product.php" class="btn btn-primary">+ Add Product</a> -->
     </div>
 
     <hr>
@@ -29,7 +29,7 @@
                 <th>Sr No</th>
                 <th>Product Name</th>
                 <th>Download</th>
-                <th>Action</th> <!-- Added Action Column -->
+                <!-- <th>Action</th> Added Action Column -->
             </tr>
         </thead>
 
@@ -45,17 +45,17 @@
                 <td><?= $sr++; ?></td>
                 <td><?= htmlspecialchars($row['p_name']); ?></td>
                 <td>
-                    <a href="uploads/products/<?= htmlspecialchars($row['p_path']); ?>" download>
+                    <a href="../uploads/products/<?= htmlspecialchars($row['p_path']); ?>" download>
                         <?= htmlspecialchars($row['p_path']); ?>
                     </a>
                 </td>
-                <td>
-                    <!-- Delete Button -->
+                <!-- <td>
+                     Delete Button
                     <form action="delete_product.php" method="post" onsubmit="return confirm('Are you sure you want to delete this product?');">
                         <input type="hidden" name="p_id" value="<?= $row['p_id']; ?>">
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
-                </td>
+                </td> -->
             </tr>
 
         <?php endwhile; else: ?>
