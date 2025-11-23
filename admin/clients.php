@@ -33,6 +33,7 @@ if ($conn) {
     <body>
 
         <!-- Header -->
+        <div class="overlay" id="overlay"></div>
         <?php require 'header.php'; ?>
 
         <div class="container">

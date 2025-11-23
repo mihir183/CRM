@@ -46,7 +46,7 @@ if ($conn) {
             </a>
         </div>
 
-        <div class="container mt-3">
+        <div class="container mt-3 mb-5">
             <p class="text-danger">* Denotes compulsory fields & special symbol like <> " ' \ etc is not alow due to
                     security reason</p>
 

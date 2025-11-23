@@ -14,6 +14,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="short icon" href="../assets/images/MNE.png" />
         <link rel="stylesheet" href="../assets/css/header.css">
+        <link rel="stylesheet" href="../bootstrap-5.3.8-dist/css/bootstrap.min.css">
     </head>
 
     <body>
@@ -50,9 +51,13 @@
 
                         <!-- Correct Dropdown -->
                         <li class="nav-item">
-                            <button type="button" class="nav-link btn bg-transparent text-capitalize border-0 text-light m-0" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal1">
-                                <i class="fa-solid fa-user"></i> client <i class="fa-solid fa-angle-down"></i>
+                            <a href="client.php" class="text-light">
+                                <button type="button"
+                                    class="nav-link btn bg-transparent text-capitalize border-0 text-light m-0"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                    <i class="fa-solid fa-user"></i> client 
+                                    <!-- <i class="fa-solid fa-angle-down"></i> -->
+                            </a>
                             </button>
                         </li>
 
@@ -82,7 +87,7 @@
 
 
         <!-- Modal -->
-        <div class="CModal modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="CModal modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog w-25 m-0">
                 <div class="modal-content m-0">
                     <div class="modal-body d-flex flex-column gap-1">
@@ -93,7 +98,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Modal for SignOut -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -8,6 +8,7 @@
         <title></title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="../bootstrap-5.3.8-dist/css/bootstrap.min.css">
         <style>
             :root {
                 --bg: #f5f6fa;
@@ -391,22 +392,22 @@
         <!-- sidebar -->
         <div class="sidebar" id="sidebar">
             <h3>CRM</h3>
-            <a href="#" class="side-link active"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+            <a href="dashboard.php" class="side-link active"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
             <a href="tickets.php" class="side-link"><i class="fas fa-ticket-alt "></i><span
                     class="text-capitalize">tickets</span></a>
-            <a href="#" class="side-link"><i class="fas fa-clipboard-list "></i><span
-                    class="text-capitalize">Requests</span></a>
+            <!-- <a href="#" class="side-link"><i class="fas fa-clipboard-list "></i><span
+                    class="text-capitalize">Requests</span></a> -->
             <a href="product.php" class="side-link"><i class="fas fa-clipboard-list "></i><span
                     class="text-capitalize">products</span></a>
             <a href="clients.php" class="side-link"><i class="fas fa-users "></i><span
                     class="text-capitalize">Customers</span></a>
-            <a href="clients.php" class="side-link"><i class="fas fa-file-alt "></i><span
-                    class="text-capitalize">Reports</span></a>
+            <!-- <a href="clients.php" class="side-link"><i class="fas fa-file-alt "></i><span
+                    class="text-capitalize">Reports</span></a> -->
             <a class="side-link dropdown-btn"><i class="fas fa-cog "></i><span class="text-capitalize">Settings</span><i
                     class="fas fa-caret-down ms-auto"></i></a>
             <div class="dropdown-container">
                 <a href="#"><i class="fas fa-key"></i> Change Password</a>
-                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="../pages/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </div>
 

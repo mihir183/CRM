@@ -12,7 +12,7 @@
   </head>
   <body>
     
-    <div class="footer text-center bg-dark position-fixed bottom-0 w-100 mt-3 mb-0 z-3">
+    <div class="footer text-center bg-dark position-fixed bottom-0 w-100 mt-3 mb-0 z-3 p-3">
         <!-- <p class="text-capitalize py-1 mb-0 text-light">&copy developed by : mihir vaghela</p> -->
         <p class="text-capitalize py-1 mb-0 text-light">&copy developed by : LJ Students</p>
     </div>
