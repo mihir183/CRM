@@ -37,9 +37,9 @@
                         <h5>Quick Links</h5>
                         <a href="dashboard.php" class="text-capitalize">Dashboard</a>
                         <a href="ticket.php" class="text-capitalize">Tickets</a>
-                        <a href="client" class="text-capitalize">customer</a>
-                        <a href="product" class="text-capitalize">product</a>
-                        <a href="logout" class="text-capitalize">logout</a>
+                        <a href="client.php" class="text-capitalize">customer</a>
+                        <a href="product.php" class="text-capitalize">product</a>
+                        <a href="logout.php" class="text-capitalize">logout</a>
                     </div>
 
                     <div class="col-md-3">
