@@ -1,10 +1,21 @@
 <img src="./assets/images/screenshot/login.png" alt="Image">
 <img src="./assets/images/screenshot/register.png" alt="Image">
+<img src="./assets/images/screenshot/reset.png" alt="Image">
+<img src="./assets/images/screenshot/OTP.png" alt="Image">
+<img src="./assets/images/screenshot/change_pass.png" alt="Image">
+<img src="./assets/images/screenshot/home.png" alt="Image">
 <img src="./assets/images/screenshot/product.png" alt="Image">
-<img src="./assets/images/screenshot/add_product.png" alt="Image">
 <img src="./assets/images/screenshot/client.png" alt="Image">
 <img src="./assets/images/screenshot/add_client.png" alt="Image">
+<img src="./assets/images/screenshot/add_client2.png" alt="Image">
 <img src="./assets/images/screenshot/edit_client.png" alt="Image">
-<img src="./assets/images/screenshot/tickets.png" alt="Image">
+<img src="./assets/images/screenshot/ticket.png" alt="Image">
 <img src="./assets/images/screenshot/add_ticket.png" alt="Image">
-<!-- <img src="./assets/images/screenshot/.png" alt="Image"> -->
+<img src="./assets/images/screenshot/edit_ticket.png" alt="Image">
+<img src="./assets/images/screenshot/view_ticket.png" alt="Image">
+<img src="./assets/images/screenshot/sign_out.png" alt="Image">
+<img src="./assets/images/screenshot/dashboard.png" alt="Image">
+<img src="./assets/images/screenshot/admin_ticket.png" alt="Image">
+<img src="./assets/images/screenshot/admin_client.png" alt="Image">
+<img src="./assets/images/screenshot/admin_product.png" alt="Image">
+<img src="./assets/images/screenshot/admin_add_product.png" alt="Image">

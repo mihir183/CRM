@@ -9,10 +9,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+    <style>
+      .footer{
+        margin-top:auto;
+    }
+    </style>
   </head>
   <body>
     
-    <div class="footer text-center bg-dark position-fixed bottom-0 w-100 mt-3 mb-0 z-3 p-3">
+    <div class="footer text-center  bottom-0 bg-dark w-100 mb-0 z-3 p-3">
         <!-- <p class="text-capitalize py-1 mb-0 text-light">&copy developed by : mihir vaghela</p> -->
         <p class="text-capitalize py-1 mb-0 text-light">&copy developed by : LJ Students</p>
     </div>
