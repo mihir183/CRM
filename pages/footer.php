@@ -17,7 +17,7 @@
   </head>
   <body>
     
-    <div class="footer text-center  bottom-0 bg-dark w-100 mb-0 z-3 p-3">
+    <div class="footer text-center bg-dark w-100 mb-0 z-3 p-3">
         <!-- <p class="text-capitalize py-1 mb-0 text-light">&copy developed by : mihir vaghela</p> -->
         <p class="text-capitalize py-1 mb-0 text-light">&copy developed by : LJ Students</p>
     </div>
