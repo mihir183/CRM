@@ -11,6 +11,7 @@
 <img src="./assets/images/screenshot/edit_client.png" alt="Image">
 <img src="./assets/images/screenshot/ticket.png" alt="Image">
 <img src="./assets/images/screenshot/add_ticket.png" alt="Image">
+<img src="./assets/images/screenshot/add_ticket2.png" alt="Image">
 <img src="./assets/images/screenshot/edit_ticket.png" alt="Image">
 <img src="./assets/images/screenshot/view_ticket.png" alt="Image">
 <img src="./assets/images/screenshot/sign_out.png" alt="Image">

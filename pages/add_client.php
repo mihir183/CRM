@@ -113,7 +113,7 @@ $products = mysqli_query($conn, "SELECT p_id, p_name FROM products ORDER BY p_na
           <select name="product" id="product" class="form-control" required>
             <option disabled selected>-- Select Product --</option>
             <?php while ($row = mysqli_fetch_assoc($products)): ?>
-              <option value="<?= $row['p_id'] ?>"><?= htmlspecialchars($row['p_name']) ?></option>
+              <option value="<?= $row['p_name'] ?>"><?= htmlspecialchars($row['p_name']) ?></option>
             <?php endwhile; ?>
           </select>
         </div>
@@ -148,16 +148,16 @@ $products = mysqli_query($conn, "SELECT p_id, p_name FROM products ORDER BY p_na
   <!-- AJAX to fetch product details -->
   <script>
     document.getElementById('product').addEventListener('change', function() {
-      let p_id = this.value;
+      let p_name = this.value;
 
-      if (!p_id) {
+      if (!p_name) {
         document.getElementById('variant').value = '';
         document.getElementById('p_key').value = '';
         document.getElementById('l_key').value = '';
         return;
       }
 
-      fetch('get_product_data.php?p_id=' + p_id)
+      fetch('get_product_data.php?p_name=' + encodeURIComponent(p_name))
         .then(res => res.json())
         .then(data => {
           if (data.success) {

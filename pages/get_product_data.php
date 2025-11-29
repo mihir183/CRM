@@ -1,10 +1,14 @@
 <?php
 include 'db.php';
 
-if (isset($_GET['p_id'])) {
-    $p_id = intval($_GET['p_id']);
-    $stmt = $conn->prepare("SELECT variant, product_key, licence_key FROM products WHERE p_id = ?");
-    $stmt->bind_param("i", $p_id);
+if (isset($_GET['p_name'])) {
+
+    $p_name = $_GET['p_name']; // keep string, do NOT use intval()
+
+    $stmt = $conn->prepare("SELECT variant, product_key, licence_key 
+                            FROM products 
+                            WHERE p_name = ?");
+    $stmt->bind_param("s", $p_name);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -13,4 +17,7 @@ if (isset($_GET['p_id'])) {
     } else {
         echo json_encode(['success' => false]);
     }
+
+    $stmt->close();
 }
+?>

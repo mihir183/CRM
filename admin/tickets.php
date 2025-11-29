@@ -56,17 +56,6 @@ $statusOptions = ['Completed', 'Pending', 'Overdue', 'In Progress', 'In Review']
                 color: white;
             }
 
-            a.btn {
-                padding: 6px 10px;
-                background: blue;
-                color: white;
-                text-decoration: none;
-            }
-
-            a.btn-del {
-                background: red;
-            }
-
             .filter-container {
                 width: 90%;
                 margin: 20px auto;
@@ -103,15 +92,15 @@ $statusOptions = ['Completed', 'Pending', 'Overdue', 'In Progress', 'In Review']
         <div class="container">
             <h2 style="text-align:center;margin-top:20px;">All Tickets</h2>
 
-            <table class="table mb-5 table-hover">
-                <thead>
+            <table class="table mb-5 table-hover text-capitalize table-striped">
+                <thead class="text-center">
                     <tr>
-                        <th>ID</th>
+                        <th>sr.no</th>
                         <th>Date</th>
                         <th>Client</th>
                         <th>Product</th>
                         <th>Complain</th>
-                        <th>Serial</th>
+                        <th>email</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -119,18 +108,22 @@ $statusOptions = ['Completed', 'Pending', 'Overdue', 'In Progress', 'In Review']
 
                 <tbody>
                     <?php if (count($tickets) > 0): ?>
-                        <?php foreach ($tickets as $t): ?>
+                        <?php foreach ($tickets as $index => $t): ?>
                             <tr>
-                                <td><?= $t['t_id'] ?></td>
+                                <td><?= $index+1 ?></td>
                                 <td><?= $t['date'] ?></td>
                                 <td><?= $t['ticket_client'] ?></td>
                                 <td><?= $t['product'] ?></td>
                                 <td><?= $t['complain'] ?></td>
-                                <td><?= $t['serial_number'] ?></td>
+                                <td><?= $t['client_email'] ?></td>
                                 <td><?= $t['status'] ?></td>
                                 <td>
-                                    <a href="edit_ticket.php?id=<?= $t['t_id'] ?>" class="btn">EDIT</a>
-                                    <a href="#" onclick="deleteTicket(<?= $t['t_id'] ?>)" class="btn btn-del">DELETE</a>
+                                    <?php if ($t['status'] !== 'Completed'): ?>
+                                        <a href="close_ticket.php?id=<?= $t['t_id'] ?>"
+                                            class="btn btn-outline-info text-capitalize">close ticket</a>
+                                    <?php else: ?>
+                                        <span class="text-success">Completed</span>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

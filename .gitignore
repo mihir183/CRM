@@ -1,6 +1,10 @@
 # Folders
 sql/
 Products/
+vendor/
 
 # Files
 secret.php
+
+composer.json
+composer.lock

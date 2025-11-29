@@ -27,9 +27,10 @@ $remark = trim($_POST['remark']);
 $given_by = trim($_POST['given_by']);
 $mobile = trim($_POST['mobile']);
 $client_email = trim($_POST['email']); // client email
+$client_mobile = trim($_POST['client_mobile']); // client email
 
 // Required Validation
-if (empty($date) || empty($ticket_client) || empty($product) || empty($complain) || empty($given_by) || empty($mobile) || empty($client_email)) {
+if (empty($date) || empty($ticket_client) || empty($product) || empty($complain) || empty($given_by) || empty($mobile) || empty($client_email) || empty($client_mobile)) {
     $_SESSION['error'] = "All (*) fields are required.";
     header("Location: add_ticket.php");
     exit();
@@ -83,12 +84,12 @@ $img3 = uploadImage('img3');
 // -----------------------------------
 $stmt = $conn->prepare("
     INSERT INTO tickets 
-    (date, ticket_client, product, complain, serial_number, remark, img1, img2, img3, given_by, mobile, client_email)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    (date, ticket_client, product, complain, serial_number, remark, img1, img2, img3, given_by, mobile, client_email,client_mobile)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
 ");
 
 $stmt->bind_param(
-    "ssssssssssss",
+    "sssssssssssss",
     $date,
     $ticket_client,
     $product,
@@ -100,7 +101,8 @@ $stmt->bind_param(
     $img3,
     $given_by,
     $mobile,
-    $client_email
+    $client_email,
+    $client_mobile
 );
 
 if ($stmt->execute()) {

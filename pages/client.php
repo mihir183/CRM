@@ -55,7 +55,7 @@ $stmt->close();
       <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
-    <div class="container pt-2">
+    <div class="container pt-2 mt-5">
       <p class="text-capitalized ms-3 fs-6 mb-4"><span class="text-primary"><i class="fa-solid fa-home">
           </i> home</span> / <i class="fa-solid fa-user"></i> client master</p>
       <div class="d-flex justify-content-between">
@@ -135,7 +135,7 @@ $stmt->close();
       </div>
 
       <!-- Pagging Setting -->
-      <div class="mt-3">
+      <div class="my-3">
         <nav>
           <ul class="pagination justify-content-center">
             <?php if ($page > 1): ?>
@@ -158,7 +158,6 @@ $stmt->close();
           </ul>
         </nav>
       </div>
-
     </div>
 
 

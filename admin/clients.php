@@ -41,11 +41,11 @@ if ($conn) {
                 All Clients
             </h2>
 
-            <table class="table border-1 mb-5">
+            <table class="table border-1 mb-5 text-capitalize">
                 <tr>
                     <th>ID</th>
                     <th>Client Name</th>
-                    <th>Phone</th>
+                    <th>product</th>
                     <th>Address</th>
                     <th>Action</th>
                 </tr>
@@ -60,7 +60,8 @@ if ($conn) {
                             <td>
                                 <a href="edit_client.php?id=<?= $c['cid'] ?>" class="btn btn-warning">EDIT</a>
 
-                                <a href="#" onclick="deleteClient(<?= $c['cid'] ?>)" class="btn btn-danger">DELETE</a>
+                                <a href="delete_client.php?id=<?= urlencode($c['cid']) ?>" class="btn btn-danger">DELETE</a>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>

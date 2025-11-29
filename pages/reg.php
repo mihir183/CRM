@@ -16,8 +16,12 @@
             integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        <!-- Offline Bootstrap -->
+        <link rel="stylesheet" href="../bootstrap-5.3.8-dist/css/bootstrap.min.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../assets/css/index.css">
+        <!-- Logo (CRM) -->
+        <link rel="short icon" href="../assets/images/MNE.png" />
         <title>CRM - Sign Up</title>
     </head>
 
@@ -58,6 +62,16 @@
                     </span>
                     <input type="email" id="email" name="email" class="form-control" placeholder="abc123@gmail.com"
                         aria-label="Email" required>
+                </div>
+
+                <!-- Email -->
+                <label for="phone" class="form-label">phone</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                    <input type="number" id="phone" name="phone" class="form-control" placeholder="1234567890"
+                        aria-label="phone" required>
                 </div>
 
                 <!-- Password -->

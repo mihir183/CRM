@@ -28,7 +28,7 @@ if ($conn) {
         // New variables
         $status   = "active";
         $active_d = date("d-m-Y H:i:s"); // current date
-        $expire_d = date("d-m-Y H:i:s", strtotime("+3 months")); // +3 months
+        $expire_d = date("d-m-Y H:i:s", strtotime("+1 year"));
 
         // Prepare query with new columns
         $stmt = $conn->prepare("
